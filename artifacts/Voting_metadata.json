@@ -4,7 +4,21 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"name": "vote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -34,11 +48,11 @@
 	},
 	"sources": {
 		"basic/Voting.sol": {
-			"keccak256": "0x9835366fa6f5ab59887ecdb79368b130666c0dfb3a9ed392f881e6e042130028",
+			"keccak256": "0x5bcd3609a8b9ee508fdec3138a6220dbf3d64c80a69acdcfbbc5083764660982",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://03ddd22396033c1dd9592b181834aef8e9197a0daf4fcb38fd310ccde3be6e8e",
-				"dweb:/ipfs/QmVKFLsJatk52EECMMwqYscyq2vp1TLUAnmL9ZYPA1H8z8"
+				"bzz-raw://7d83dd01cd0b23c5eca16eb6a71a66f70eef709e268acabf8bb5245912620f5e",
+				"dweb:/ipfs/Qmd9cvEHjASmN5ZgGh3bLUZz75TciM6EianoSRwa6M4Zcr"
 			]
 		}
 	},

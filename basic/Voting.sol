@@ -10,5 +10,21 @@ pragma solidity >=0.8.0;
 **/
 
 contract Voting {
+    mapping(string name => uint256 counts) private _voteCounts;
 
+    function vote(string memory name) external  {
+        _voteCounts[name] += 1;    
+    }
+
+    function getVotes(string memory name) external view returns (uint256) {
+        return _voteCounts[name];
+    }
+
+     function resetVotes() public {
+        _voteCounts = new mapping(string name => uint256 counts);
+    }
+    
+     function resetVotes(string memory name) public {
+        delete _voteCounts[name];
+    }
 }
