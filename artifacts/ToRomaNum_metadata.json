@@ -1,0 +1,46 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"notice": "3.用 solidity 实现整数转罗马数字 题目描述在 https://leetcode.cn/problems/roman-to-integer/description/3.*",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"basic/ToRomaNum.sol": "ToRomaNum"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"basic/ToRomaNum.sol": {
+			"keccak256": "0x5c8f640324c7aa312f33ef397e78221d7fd5936d0a810b5f8f606c8e59c8dd2a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0e689dd5c3a34922f9601b0fb3372057f235b1fbab9f8879f00219c712e3dae3",
+				"dweb:/ipfs/QmYZTbs1vCNqw8TFZjuVg6q7JXSxEbC66m1AEaAqursAPq"
+			]
+		}
+	},
+	"version": 1
+}
