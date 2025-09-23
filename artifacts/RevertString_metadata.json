@@ -4,7 +4,27 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "str",
+						"type": "string"
+					}
+				],
+				"name": "reverseStr",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -34,11 +54,11 @@
 	},
 	"sources": {
 		"basic/RevertString.sol": {
-			"keccak256": "0xe6e9b7e2e9c8a4eb9a6b9fc4c682a42b9aa81507c38f8c0b2929314095dce6f8",
+			"keccak256": "0x086d20702c6d7a494bea3a0f153463c58df54986e8f0909483b10d6b333e6aa4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1d7b6bf8e7bf9ad3edd283555298f4f31c7b17e974ce6539d225784ee6f06cba",
-				"dweb:/ipfs/QmSiRbP8ZJQZRzfjYTq2UEta3dXkkF2kXL6NYrMXx8aGhJ"
+				"bzz-raw://c4ad7dd6715f77d87601dea0c0e7cb6a8e4248f816e7a3db666182f3d6fe98f0",
+				"dweb:/ipfs/QmZVeZMNtXbPuGvFpku8FgexxHme2426zddTyeBJfnFfxq"
 			]
 		}
 	},

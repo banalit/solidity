@@ -25,6 +25,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "roma",
+						"type": "string"
+					}
+				],
+				"name": "romaToInt",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "test",
 				"outputs": [
@@ -45,14 +64,20 @@
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
-			"notice": "3.用 solidity 实现整数转罗马数字 题目描述在 https://leetcode.cn/problems/roman-to-integer/description/*",
+			"methods": {
+				"intToRoman(int256)": {
+					"notice": "3.用 solidity 实现整数转罗马数字 题目描述在 https://leetcode.cn/problems/roman-to-integer/description/*"
+				},
+				"romaToInt(string)": {
+					"notice": "4. 用 solidity 实现罗马数字转数整数 题目描述在 https://leetcode.cn/problems/integer-to-roman/description/*"
+				}
+			},
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"basic/ToRomaNum.sol": "ToRomaNum"
+			"basic/RomaNum.sol": "RomaNum"
 		},
 		"evmVersion": "prague",
 		"libraries": {},
@@ -66,12 +91,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"basic/ToRomaNum.sol": {
-			"keccak256": "0x5a89cae9301f589e801818b00d7628020e00cc451172d6a2c491fde62cca69ec",
+		"basic/RomaNum.sol": {
+			"keccak256": "0x1447f39aec1be45a864c43c1f03aebd27fea6c40e8e6bf23da4c8d33c52b4151",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4812106b20b3b9687e81f993e92119850f4708f1d4297baa0408b96907cc92bb",
-				"dweb:/ipfs/QmYf7hx9GaC245J3HHCKZ2YuQEdovExkSnq4JpLns7nNaQ"
+				"bzz-raw://b8bf79626317885c5207fdb5821b944ae9f29dd9b130df9a93b27cdcdedcfdf3",
+				"dweb:/ipfs/QmRnoWtWfpJ71rX26gyX7HfZGt9YHbPzZUxYFtZyo7Lb5y"
 			]
 		}
 	},
