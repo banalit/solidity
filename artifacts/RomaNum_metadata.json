@@ -1,0 +1,104 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "int256",
+						"name": "num",
+						"type": "int256"
+					}
+				],
+				"name": "intToRoman",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "roma",
+						"type": "string"
+					}
+				],
+				"name": "romaToInt",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "test",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"intToRoman(int256)": {
+					"notice": "3.用 solidity 实现整数转罗马数字 题目描述在 https://leetcode.cn/problems/roman-to-integer/description/*"
+				},
+				"romaToInt(string)": {
+					"notice": "4. 用 solidity 实现罗马数字转数整数 题目描述在 https://leetcode.cn/problems/integer-to-roman/description/*"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"basic/RomaNum.sol": "RomaNum"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"basic/RomaNum.sol": {
+			"keccak256": "0x1447f39aec1be45a864c43c1f03aebd27fea6c40e8e6bf23da4c8d33c52b4151",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b8bf79626317885c5207fdb5821b944ae9f29dd9b130df9a93b27cdcdedcfdf3",
+				"dweb:/ipfs/QmRnoWtWfpJ71rX26gyX7HfZGt9YHbPzZUxYFtZyo7Lb5y"
+			]
+		}
+	},
+	"version": 1
+}
