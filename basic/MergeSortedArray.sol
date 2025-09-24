@@ -7,36 +7,4 @@ pragma solidity >=0.8.0;
 **/
 contract MergeSortedArray {
     
-    function merge(int[] memory nums1, int[] memory nums2) public pure returns (int[] memory) {
-        uint m = nums1.length;
-        uint n = nums2.length;
-        int[] memory merged = new int[](m + n);
-        uint i = 0;
-        uint j = 0;
-        uint m_idx = 0;
-        
-        while (i < m && j<n) {
-            if (nums1[i] < nums2[j]) {
-                merged[m_idx] = nums1[i];
-                i++;
-            } else {
-                merged[m_idx] = nums2[j];
-                j++;
-            }
-            m_idx++;
-        }
-        
-        while (i < m) {
-            merged[m_idx] = nums1[i];
-            i++;
-            m_idx++;
-        }
-        
-        while (j < n) {
-            merged[m_idx] = nums2[j];
-            j++;
-            m_idx++;
-        }
-        return merged;
-    }
 }

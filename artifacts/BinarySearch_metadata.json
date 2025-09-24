@@ -4,52 +4,16 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [
-			{
-				"inputs": [
-					{
-						"internalType": "int256[]",
-						"name": "arr",
-						"type": "int256[]"
-					},
-					{
-						"internalType": "int256",
-						"name": "target",
-						"type": "int256"
-					}
-				],
-				"name": "search",
-				"outputs": [
-					{
-						"internalType": "int256",
-						"name": "",
-						"type": "int256"
-					}
-				],
-				"stateMutability": "pure",
-				"type": "function"
-			}
-		],
+		"abi": [],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {
-				"search(int256[],int256)": {
-					"details": "二分查找实现",
-					"params": {
-						"arr": "已排序的整数数组（假设为非递减排序）",
-						"target": "要查找的目标值"
-					},
-					"returns": {
-						"_0": "目标值的索引，未找到则返回 -1"
-					}
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
-			"notice": "6.二分查找 (Binary Search) 题目描述：在一个有序数组中查找目标值。 返回值：目标值在数组中的索引，若不存在则返回 -1*",
+			"notice": "6.二分查找 (Binary Search) 题目描述：在一个有序数组中查找目标值。*",
 			"version": 1
 		}
 	},
@@ -70,11 +34,11 @@
 	},
 	"sources": {
 		"basic/BinarySearch.sol": {
-			"keccak256": "0x01eff2935998e4c46b85cd666050c8591e1b868a0ec365c336af7b7e58ea4e67",
+			"keccak256": "0x7a6e05ed8ed27fa031d30140b8eb2aefdc56811c29819ba1ac67aa80612b3e67",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4ff0a1866e1dc6240101021de68916074510daacfc7dab2289f8e4da3c7c0ae7",
-				"dweb:/ipfs/QmcPW5Bncay1AXAqEpsK86nr7tqdjPfWFbahJjCmfx5hjy"
+				"bzz-raw://576307f313f899d0869b00ab2b95c4dfa956b5224f95a82d606cba9783751df1",
+				"dweb:/ipfs/QmSfj2PpaPW8AG7JDaQtKTgRZ92gLWdesTvABS5pfbGpaa"
 			]
 		}
 	},
