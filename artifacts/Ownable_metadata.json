@@ -6,11 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -52,44 +47,6 @@
 				"type": "event"
 			},
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "oldCount",
-						"type": "uint256"
-					}
-				],
-				"name": "VoteReset",
-				"type": "event"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					}
-				],
-				"name": "getVotes",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -110,26 +67,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "resetVotes",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					}
-				],
-				"name": "resetVotes",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -141,26 +78,10 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					}
-				],
-				"name": "vote",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"stateMutability": "payable",
-				"type": "receive"
 			}
 		],
 		"devdoc": {
+			"details": "Contract module which provides a basic access control mechanism, where there is an account (an owner) that can be granted exclusive access to specific functions. The initial owner is set to the address provided by the deployer. This can later be changed with {transferOwnership}. This module is used through inheritance. It will make available the modifier `onlyOwner`, which can be applied to your functions to restrict their use to the owner.",
 			"errors": {
 				"OwnableInvalidOwner(address)": [
 					{
@@ -175,6 +96,9 @@
 			},
 			"kind": "dev",
 			"methods": {
+				"constructor": {
+					"details": "Initializes the contract setting the address provided by the deployer as the initial owner."
+				},
 				"owner()": {
 					"details": "Returns the address of the current owner."
 				},
@@ -190,13 +114,12 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
-			"notice": "1.创建一个名为Voting的合约，包含以下功能： 一个mapping来存储候选人的得票数 一个vote函数，允许用户投票给某个候选人 一个getVotes函数，返回某个候选人的得票数 一个resetVotes函数，重置所有候选人的得票数*",
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"basic/Voting.sol": "Voting"
+			".deps/npm/@openzeppelin/contracts/access/Ownable.sol": "Ownable"
 		},
 		"evmVersion": "prague",
 		"libraries": {},
@@ -210,7 +133,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"@openzeppelin/contracts/access/Ownable.sol": {
+		".deps/npm/@openzeppelin/contracts/access/Ownable.sol": {
 			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
 			"license": "MIT",
 			"urls": [
@@ -218,20 +141,12 @@
 				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
 			]
 		},
-		"@openzeppelin/contracts/utils/Context.sol": {
+		".deps/npm/@openzeppelin/contracts/utils/Context.sol": {
 			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
 			"license": "MIT",
 			"urls": [
 				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
 				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
-			]
-		},
-		"basic/Voting.sol": {
-			"keccak256": "0xe293a75ce5f0fd8539aad0f24912bdbfc540232d3cd728591b01c7ce41ff10d1",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://ee57357847098b9195a11dc296d3fa6ae212464f491a08746911375833a5df99",
-				"dweb:/ipfs/QmeTuaK3V1xAiY1R5cYjbzxdYio3xUZNi6wnZH6BAgZ4TW"
 			]
 		}
 	},

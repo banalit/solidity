@@ -12,20 +12,29 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract Voting is Ownable{
     event VoteReset(string indexed name, uint256 oldCount);
     mapping(string name => uint256 counts) private _voteCounts;
+    string[] names;
     
     constructor() Ownable(msg.sender) {}
 
     function vote(string memory name) external  {
-        _voteCounts[name] += 1;    
+        if (_voteCounts[name]==0) {
+            names.push(name);
+        }
+        _voteCounts[name] += 1;
+        
     }
 
     function getVotes(string memory name) external view returns (uint256) {
         return _voteCounts[name];
     }
+    
     receive() external payable { }
-    //  function resetVotes() public {
-    //     delete _voteCounts;
-    // }
+
+    function resetVotes() public onlyOwner{
+        for (uint i=0;i<names.length;i++) {
+            resetVotes(names[i]);
+        }
+    }
     
      function resetVotes(string memory name) public onlyOwner{
         require(bytes(name).length>0, "Name must input");
