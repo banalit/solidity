@@ -1,0 +1,69 @@
+{
+	"id": "51f1c95c99d94ea352253900e52d41aa",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"upgrade/begging.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ~0.8.0;\r\n\r\n/**\r\n作业3：编写一个讨饭合约\r\n任务目标\r\n使用 Solidity 编写一个合约，允许用户向合约地址发送以太币。\r\n记录每个捐赠者的地址和捐赠金额。\r\n允许合约所有者提取所有捐赠的资金。\r\n\r\n任务步骤\r\n编写合约\r\n创建一个名为 BeggingContract 的合约。\r\n合约应包含以下功能：\r\n一个 mapping 来记录每个捐赠者的捐赠金额。\r\n一个 donate 函数，允许用户向合约发送以太币，并记录捐赠信息。\r\n一个 withdraw 函数，允许合约所有者提取所有资金。\r\n一个 getDonation 函数，允许查询某个地址的捐赠金额。\r\n使用 payable 修饰符和 address.transfer 实现支付和提款。\r\n部署合约\r\n在 Remix IDE 中编译合约。\r\n部署合约到 Goerli 或 Sepolia 测试网。\r\n测试合约\r\n使用 MetaMask 向合约发送以太币，测试 donate 功能。\r\n调用 withdraw 函数，测试合约所有者是否可以提取资金。\r\n调用 getDonation 函数，查询某个地址的捐赠金额。\r\n*/"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"upgrade/begging.sol": {
+				"ast": {
+					"absolutePath": "upgrade/begging.sol",
+					"exportedSymbols": {},
+					"id": 2,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"~",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						}
+					],
+					"src": "33:1061:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
