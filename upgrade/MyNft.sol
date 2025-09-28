@@ -3,7 +3,9 @@ pragma solidity ~0.8.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/interfaces/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
+import "@openzeppelin/contracts/interfaces/IERC721Receiver.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 /**
 作业2：在测试网上发行一个图文并茂的 NFT
 任务目标 
@@ -40,36 +42,54 @@ contract MyNFT is IERC721, Ownable {
     using Address for address;
     using Strings for uint256;
 
+    // 接口ID定义（ERC165规定的标准接口ID）
+    bytes4 private constant _INTERFACE_ID_ERC721 = 0x80ac58cd; // IERC721的接口ID
+    bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7; // IERC165自身的接口ID
+
     // NFT名称和符号
     string private _name;
     string private _symbol;
     
     // 记录每个tokenId的所有者
-    mapping(uint256 => address) private _owners;
+    mapping(uint256 tokenId => address owner) private _owners;
     
     // 记录每个地址拥有的token数量
-    mapping(address => uint256) private _balances;
+    mapping(address owner=> uint256 tokenIdCount) private _balances;
     
     // 记录授权地址
-    mapping(uint256 => address) private _tokenApprovals;
+    mapping(uint256 tokenId=> address approved) private _tokenApprovals;
     
     // 记录批量授权
-    mapping(address => mapping(address => bool)) private _operatorApprovals;
+    mapping(address operator=> mapping(address spender=> bool approved)) private _operatorApprovals;
     
     // 下一个要铸造的token ID
     uint256 private _nextTokenId;
     
     // 存储token的元数据URI
-    mapping(uint256 => string) private _tokenURIs;
+    mapping(uint256 tokenId=> string metaDataUrl) private _tokenURIs;
+
+    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId, uint256 timestamp);
+    event Transfer(address from, address indexed recipient, uint256 tokenId, uint256 indexed timestamp);
 
     constructor(
         string memory name_,
-        string memory symbol_,
-        address initialOwner
-    ) Ownable(initialOwner) {
+        string memory symbol_
+    ) Ownable(msg.sender) {
         _name = name_;
         _symbol = symbol_;
         _nextTokenId = 1;
+    }
+
+    /**
+     * @dev 实现ERC165接口，用于检查合约是否支持特定的接口
+     * @param interfaceId 要检查的接口ID
+     * @return bool 是否支持该接口
+     */
+    function supportsInterface(bytes4 interfaceId) external pure returns (bool) {
+        // 支持IERC165自身、IERC721接口
+        return 
+            interfaceId == _INTERFACE_ID_ERC165 || 
+            interfaceId == _INTERFACE_ID_ERC721;
     }
 
     /**
@@ -87,19 +107,19 @@ contract MyNFT is IERC721, Ownable {
     }
 
     /**
-     * @dev 返回token的URI
-     */
-    function tokenURI(uint256 tokenId) public view returns (string memory) {
-        require(_exists(tokenId), "Token does not exist");
-        return _tokenURIs[tokenId];
+    * @dev Returns the metadata URI for a given token ID.
+    */
+    function tokenURI(uint256 _tokenId) public view returns (string memory) {
+        require(_exists(_tokenId), "Token does not exist");
+        return _tokenURIs[_tokenId];
     }
 
     /**
      * @dev 查看tokenId的所有者
      */
     function ownerOf(uint256 tokenId) public view returns (address) {
+        require(_exists(tokenId), "Token does not exist");
         address owner = _owners[tokenId];
-        require(owner != address(0), "Token does not exist");
         return owner;
     }
 
@@ -114,15 +134,10 @@ contract MyNFT is IERC721, Ownable {
     /**
      * @dev 转移NFT
      */
-    function transferFrom(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public {
-        require(_isApprovedOrOwner(msg.sender, tokenId), "Not approved or owner");
+    function transferFrom(address from, address to, uint256 tokenId) public {
+        require(_isApprovedOrOwner(msg.sender, tokenId), "Not eligible");
         require(ownerOf(tokenId) == from, "From is not owner");
         require(to != address(0), "To is zero address");
-
         _transfer(from, to, tokenId);
     }
 
@@ -131,16 +146,16 @@ contract MyNFT is IERC721, Ownable {
      */
     function approve(address to, uint256 tokenId) public {
         address owner = ownerOf(tokenId);
-        require(to != owner, "Cannot approve to owner");
-        require(msg.sender == owner || isApprovedForAll(owner, msg.sender), 
-            "Not owner or approved for all");
-
+        require(owner!=address(0), "Token not exist");
+        require(to != owner, "Cannot approve to owner heself");
+        require(msg.sender == owner || isApprovedForAll(owner, msg.sender), "Not owner or approved");
         _tokenApprovals[tokenId] = to;
-        emit Approval(owner, to, tokenId);
+        emit Approval(owner, to, tokenId, block.timestamp);
+
     }
 
     /**
-     * @dev 查看token的授权地址
+     * @dev 查看token的授权账户地址
      */
     function getApproved(uint256 tokenId) public view returns (address) {
         require(_exists(tokenId), "Token does not exist");
@@ -166,11 +181,7 @@ contract MyNFT is IERC721, Ownable {
     /**
      * @dev 安全转移NFT
      */
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public {
+    function safeTransferFrom(address from, address to, uint256 tokenId) public {
         safeTransferFrom(from, to, tokenId, "");
     }
 
@@ -190,16 +201,16 @@ contract MyNFT is IERC721, Ownable {
     /**
      * @dev 铸造NFT
      */
-    function mintNFT(address recipient, string memory tokenURI) public onlyOwner returns (uint256) {
+    function mintNFT(address recipient, string memory iTokenURI) public onlyOwner returns (uint256) {
         require(recipient != address(0), "Recipient is zero address");
         
         uint256 tokenId = _nextTokenId++;
         
         _balances[recipient]++;
         _owners[tokenId] = recipient;
-        _tokenURIs[tokenId] = tokenURI;
+        _tokenURIs[tokenId] = iTokenURI;
         
-        emit Transfer(address(0), recipient, tokenId);
+        emit Transfer(address(0), recipient, tokenId, block.timestamp);
         
         return tokenId;
     }
@@ -222,17 +233,12 @@ contract MyNFT is IERC721, Ownable {
     /**
      * @dev 执行转移操作
      */
-    function _transfer(
-        address from,
-        address to,
-        uint256 tokenId
-    ) internal {
+    function _transfer(address from, address to, uint256 tokenId) internal {
         _balances[from]--;
         _balances[to]++;
         _owners[tokenId] = to;
         delete _tokenApprovals[tokenId];
-        
-        emit Transfer(from, to, tokenId);
+        emit Transfer(from, to, tokenId, block.timestamp);
     }
 
     /**
@@ -257,7 +263,7 @@ contract MyNFT is IERC721, Ownable {
         uint256 tokenId,
         bytes memory data
     ) private returns (bool) {
-        if (to.isContract()) {
+        if (to.code.length > 0) {
             try IERC721Receiver(to).onERC721Received(msg.sender, from, tokenId, data) returns (bytes4 retval) {
                 return retval == IERC721Receiver.onERC721Received.selector;
             } catch (bytes memory reason) {
@@ -265,6 +271,7 @@ contract MyNFT is IERC721, Ownable {
                     revert("Transfer to non-receiving contract");
                 } else {
                     assembly {
+                        //revert(错误信息的内存起始地址, 错误信息的长度)
                         revert(add(32, reason), mload(reason))
                     }
                 }
@@ -276,12 +283,12 @@ contract MyNFT is IERC721, Ownable {
 }
 
 // 导入ERC721接收接口
-interface IERC721Receiver {
-    function onERC721Received(
-        address operator,
-        address from,
-        uint256 tokenId,
-        bytes calldata data
-    ) external returns (bytes4);
-}
+// interface IERC721Receiver {
+//     function onERC721Received(
+//         address operator,
+//         address from,
+//         uint256 tokenId,
+//         bytes calldata data
+//     ) external returns (bytes4);
+// }
     
