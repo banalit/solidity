@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ~0.8.0;
 
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+
 /**
 作业3：编写一个讨饭合约
 任务目标
@@ -25,3 +28,46 @@ pragma solidity ~0.8.0;
 调用 withdraw 函数，测试合约所有者是否可以提取资金。
 调用 getDonation 函数，查询某个地址的捐赠金额。
 */
+contract BeggingContract {
+    using Strings for uint256;
+    event Donate(address indexed _from, uint256 _amount);
+    event Withdraw(address indexed _to, uint256 _amount);
+    mapping(address donater=>uint256 amount) public donations; // 记录每个捐赠者的捐赠金额
+    address public owner; // 合约所有者
+    uint256 public totalDonations; // 总捐赠金额
+
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        _checkOwner();
+        _;
+    }
+
+    function donate() public payable {
+        donations[msg.sender] += msg.value;
+        totalDonations += msg.value;
+        emit Donate(msg.sender,msg.value);
+    }
+
+    function _checkOwner() private view {
+        require(msg.sender == owner, "You are not the owner");
+    }
+
+     function withdraw() public onlyOwner{
+        payable(msg.sender).transfer(address(this).balance);
+        emit Withdraw(msg.sender,address(this).balance);
+    }
+
+    function getDonation(address addr) public view returns (uint256) {
+        require(donations[addr] != 0, "You have not donated yet");
+        return donations[addr];
+    }
+
+    function getTotalDonations() public view returns (uint256) {
+        return totalDonations;
+    }
+
+}
